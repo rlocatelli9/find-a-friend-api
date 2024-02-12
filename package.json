@@ -1,0 +1,35 @@
+{
+  "name": "find-a-friend-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "npm": ">=10.2.4",
+    "node": ">=20.11.0"
+  },
+  "scripts": {
+    "build": "tusp src",
+    "start": "tsx src/server/index.ts",
+    "start:dev": "tsx watch src/server/index.ts",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "Robson Locatelli",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "20.11.17",
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "eslint": "8.56.0",
+    "tsup": "8.0.2",
+    "tsx": "4.7.1",
+    "typescript": "5.3.3",
+    "vitest": "1.2.2"
+  },
+  "dependencies": {
+    "fastify": "4.26.1",
+    "zod": "3.22.4"
+  }
+}
