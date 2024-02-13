@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum Size {
+  SMALL
+  MIDDLE
+  BIG
+  GIANT
+}
+
+enum TypePet {
+  DOG
+  CAT
+  OTHERS
+}
+
+model Post {
+  id           String    @id @default(uuid())
+  title        String    @db.VarChar(255)
+  published    Boolean   @default(false)
+  created_at   DateTime  @default(now())
+  owner_id     String
+  pet_id       String
+  description  String
+  published_at DateTime?
+  deleted_at   DateTime?
+  tags         Tag[]
+  user         User      @relation(fields: [owner_id], references: [id])
+  pet          Pet       @relation(fields: [pet_id], references: [id])
+
+  @@map("posts")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  password_hash String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  actived_at    DateTime?
+  deleted_at    DateTime?
+  role          Role      @default(MEMBER)
+  posts         Post[]
+  tags          Tag[]
+  pets          Pet[]
+
+  @@map("users")
+}
+
+model Pet {
+  id           String    @id @default(uuid())
+  type         TypePet   @default(DOG)
+  name         String
+  race         String
+  deficiencies String
+  description  String
+  owner_id     String
+  age          Int
+  energy       Int
+  available    Boolean   @default(true)
+  size         Size      @default(SMALL)
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+  deleted_at   DateTime?
+  posts        Post[]
+  user         User      @relation(fields: [owner_id], references: [id])
+
+  @@map("pets")
+}
+
+model Tag {
+  id       String @id @default(uuid())
+  name     String
+  owner_id String
+  posts    Post[]
+  user     User   @relation(fields: [owner_id], references: [id])
+
+  @@map("tags")
+}
