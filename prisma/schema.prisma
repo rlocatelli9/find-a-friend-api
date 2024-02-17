@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  ORG
+  MEMBER
+}
+
+enum Size {
+  SMALL
+  MIDDLE
+  BIG
+  GIANT
+}
+
+enum TypePet {
+  DOG
+  CAT
+  OTHERS
+}
+
+model Post {
+  id           String      @id @default(uuid())
+  title        String
+  description  String
+  owner_id     String
+  pet_id       String
+  published_at DateTime?
+  deleted_at   DateTime?
+  created_at   DateTime    @default(now())
+  tags         TagOnPost[]
+  user         User        @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pet          Pet         @relation(fields: [pet_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("posts")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  password_hash String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  actived_at    DateTime?
+  deleted_at    DateTime?
+  role          Role      @default(MEMBER)
+  posts         Post[]
+  tags          Tag[]
+  pets          Pet[]
+  org           Org?
+
+  @@map("users")
+}
+
+model Org {
+  id         String    @id @default(uuid())
+  name       String
+  phone      String
+  cnpj       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+  owner_id   String    @unique
+  user       User      @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  address    Address?
+
+  @@map("orgs")
+}
+
+model Address {
+  id         String  @id @default(uuid())
+  country    String
+  uf         String
+  city       String
+  complement String
+  zip_code   String
+  latitude   Decimal
+  longitude  Decimal
+  org        Org     @relation(fields: [org_id], references: [id])
+  org_id     String  @unique
+
+  @@map("address")
+}
+
+model Pet {
+  id           String    @id @default(uuid())
+  type         TypePet   @default(DOG)
+  name         String
+  race         String
+  deficiencies String
+  description  String
+  owner_id     String
+  age          Int
+  energy       Int
+  available    Boolean   @default(true)
+  size         Size      @default(SMALL)
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+  deleted_at   DateTime?
+  posts        Post[]
+  user         User      @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("pets")
+}
+
+model Tag {
+  id       String      @id @default(uuid())
+  name     String
+  owner_id String
+  user     User        @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  posts    TagOnPost[]
+
+  @@map("tags")
+}
+
+model TagOnPost {
+  post        Post     @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  post_id     String
+  tag         Tag      @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  category_id String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@id([post_id, category_id])
+  @@map("tags_on_posts")
+}
