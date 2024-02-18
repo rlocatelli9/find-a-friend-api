@@ -98,7 +98,7 @@ model Pet {
   type         TypePet   @default(DOG)
   name         String
   race         String
-  deficiencies String
+  deficiencies Boolean   @default(false)
   description  String
   owner_id     String
   age          Int
