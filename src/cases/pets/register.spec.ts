@@ -1,6 +1,5 @@
-import {beforeEach, describe, expect, it} from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import PetRegisterCase from './register'
-import { compare } from 'bcryptjs'
 import PetsFakeRepository from 'src/repositories/fake/pets-repository'
 import { randomUUID } from 'node:crypto'
 
