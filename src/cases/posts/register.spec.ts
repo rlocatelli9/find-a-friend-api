@@ -1,6 +1,4 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import PetsFakeRepository from 'src/repositories/fake/pets-repository'
-import { randomUUID } from 'node:crypto'
 import RegisterPostCase from './register'
 import PostsFakeRepository from 'src/repositories/fake/posts-repository'
 
