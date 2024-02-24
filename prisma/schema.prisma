@@ -79,7 +79,7 @@ model Org {
 }
 
 model Address {
-  id         String  @id @default(uuid())
+  id         String    @id @default(uuid())
   country    String
   uf         String
   city       String
@@ -87,10 +87,13 @@ model Address {
   zip_code   String
   latitude   Decimal
   longitude  Decimal
-  org        Org     @relation(fields: [org_id], references: [id])
-  org_id     String  @unique
+  org        Org       @relation(fields: [org_id], references: [id])
+  org_id     String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
-  @@map("address")
+  @@map("addresses")
 }
 
 model Pet {
@@ -116,7 +119,7 @@ model Pet {
 
 model Tag {
   id       String      @id @default(uuid())
-  name     String
+  value    String
   owner_id String
   user     User        @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   posts    TagOnPost[]
@@ -125,13 +128,13 @@ model Tag {
 }
 
 model TagOnPost {
-  post        Post     @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  post_id     String
-  tag         Tag      @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  category_id String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  post_id    String
+  tag        Tag      @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tag_id     String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  @@id([post_id, category_id])
+  @@id([post_id, tag_id])
   @@map("tags_on_posts")
 }
