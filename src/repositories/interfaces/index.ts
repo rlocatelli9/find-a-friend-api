@@ -1,4 +1,4 @@
-import { Address, Org, Pet, Post, Prisma, User } from "@prisma/client";
+import { Address, Org, Pet, Post, Prisma, Tag, TagOnPost, User } from "@prisma/client";
 
 export interface IUsersRepository {
   create(data: Prisma.UserCreateInput): Promise<User>
@@ -23,4 +23,12 @@ export interface IAddressesRepository {
 
 export interface IPostsRepository {
   create(data: Prisma.PostUncheckedCreateInput): Promise<Post>
+}
+
+export interface ITagsRepository {
+  create(data: Prisma.TagUncheckedCreateInput): Promise<Tag>
+}
+
+export interface ITagsOnPostsRepository {
+  create(data: Prisma.TagOnPostUncheckedCreateInput): Promise<TagOnPost>
 }
