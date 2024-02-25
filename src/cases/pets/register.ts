@@ -4,6 +4,7 @@ export type PetType = 'DOG'|'CAT'|'OTHERS'
 export type PetSize = 'SMALL'|'MIDDLE'|'BIG'|'GIANT'
 
 export interface RegisterPetProps{
+  id?:string
   type: PetType
   name: string
   race: string
