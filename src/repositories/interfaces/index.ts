@@ -7,6 +7,7 @@ export interface IUsersRepository {
 
 export interface IPetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
+  findById(petId: string): Promise<Pet | null>
   findByOwnerId(ownerId: string): Promise<Pet | null>
 }
 
