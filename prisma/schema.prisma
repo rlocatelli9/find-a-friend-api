@@ -39,8 +39,8 @@ model Post {
   deleted_at   DateTime?
   created_at   DateTime    @default(now())
   tags         TagOnPost[]
-  user         User        @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  pet          Pet         @relation(fields: [pet_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  org          Org         @relation(fields: [owner_id], references: [id])
+  pet          Pet         @relation(fields: [pet_id], references: [id])
 
   @@map("posts")
 }
@@ -55,10 +55,7 @@ model User {
   actived_at    DateTime?
   deleted_at    DateTime?
   role          Role      @default(MEMBER)
-  posts         Post[]
-  tags          Tag[]
-  pets          Pet[]
-  org           Org?
+  org           Org[]
 
   @@map("users")
 }
@@ -72,8 +69,11 @@ model Org {
   updated_at DateTime  @updatedAt
   deleted_at DateTime?
   owner_id   String    @unique
-  user       User      @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user       User      @relation(fields: [owner_id], references: [id])
   address    Address?
+  Pet        Pet[]
+  Post       Post[]
+  tags       Tag[]
 
   @@map("orgs")
 }
@@ -112,28 +112,32 @@ model Pet {
   updated_at   DateTime  @updatedAt
   deleted_at   DateTime?
   posts        Post[]
-  user         User      @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  org          Org       @relation(fields: [owner_id], references: [id])
 
   @@map("pets")
 }
 
 model Tag {
-  id       String      @id @default(uuid())
-  value    String
-  owner_id String
-  user     User        @relation(fields: [owner_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  posts    TagOnPost[]
+  id         String      @id @default(uuid())
+  value      String
+  owner_id   String
+  posts      TagOnPost[]
+  Org        Org         @relation(fields: [owner_id], references: [id])
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  deleted_at DateTime?
 
   @@map("tags")
 }
 
 model TagOnPost {
-  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  post       Post      @relation(fields: [post_id], references: [id])
   post_id    String
-  tag        Tag      @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tag        Tag       @relation(fields: [tag_id], references: [id])
   tag_id     String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   @@id([post_id, tag_id])
   @@map("tags_on_posts")
