@@ -1,4 +1,5 @@
 import { Address, Org, Pet, Post, Prisma, Tag, TagOnPost, User } from "@prisma/client";
+import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
 
 export interface IUsersRepository {
   create(data: Prisma.UserCreateInput): Promise<User>
@@ -8,6 +9,7 @@ export interface IUsersRepository {
 export interface IPetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   findById(petId: string): Promise<Pet | null>
+  findManyByQuery({query, page, pageSize}:FilterByQueryPetProps): Promise<Pet[]>
   findByOwnerId(ownerId: string): Promise<Pet | null>
 }
 
