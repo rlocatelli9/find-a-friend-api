@@ -1,4 +1,4 @@
-import { Address, Org, Pet, Post, Prisma, Tag, TagOnPost, User } from "@prisma/client";
+import { Org, Pet, Post, Prisma, Tag, TagOnPost, User } from "@prisma/client";
 import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
 
 export interface IUsersRepository {
@@ -17,11 +17,6 @@ export interface IOrgsRepository {
   create(data: Prisma.OrgUncheckedCreateInput): Promise<Org>
   findByOwnerId(ownerId: string): Promise<Org | null>
   findByPhone(phone: string): Promise<Org | null>
-}
-
-export interface IAddressesRepository {
-  create(data: Prisma.AddressUncheckedCreateInput): Promise<Address>
-  findByOrgId(orgId: string): Promise<Address | null>
 }
 
 export interface IPostsRepository {
