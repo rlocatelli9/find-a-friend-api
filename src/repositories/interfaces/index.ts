@@ -1,4 +1,5 @@
 import { Org, Pet, Post, Prisma, Tag, TagOnPost, User } from "@prisma/client";
+import { FindManyByCityProps } from "src/cases/orgs/find-many-by-city";
 import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
 
 export interface IUsersRepository {
@@ -17,6 +18,7 @@ export interface IOrgsRepository {
   create(data: Prisma.OrgUncheckedCreateInput): Promise<Org>
   findByOwnerId(ownerId: string): Promise<Org | null>
   findByPhone(phone: string): Promise<Org | null>
+  findManyByCity({city, uf, page, pageSize}:FindManyByCityProps): Promise<Org[]>
 }
 
 export interface IPostsRepository {
