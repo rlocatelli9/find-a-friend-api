@@ -1,10 +1,12 @@
 import { Org, Pet, Post, Prisma, Tag, TagOnPost, User } from "@prisma/client";
 import { FindManyByCityProps } from "src/cases/orgs/find-many-by-city";
 import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
+import { PetSize, PetType } from "src/cases/pets/register";
 
 export interface IUsersRepository {
   create(data: Prisma.UserCreateInput): Promise<User>
   findByEmail(email: string): Promise<User | null>
+  findById(id: string): Promise<User | null>
 }
 
 export interface IPetsRepository {
@@ -31,4 +33,11 @@ export interface ITagsRepository {
 
 export interface ITagsOnPostsRepository {
   create(data: Prisma.TagOnPostUncheckedCreateInput): Promise<TagOnPost>
+}
+
+export type PetQueryProps = {
+  type: PetType,
+  age: string,
+  energy: string,
+  size: PetSize
 }
