@@ -1,0 +1,19 @@
+import { z } from 'zod';
+import { TagOnPostCreateNestedManyWithoutTagInputObjectSchema } from './TagOnPostCreateNestedManyWithoutTagInput.schema';
+
+import type { Prisma } from '@prisma/client';
+
+const Schema: z.ZodType<Prisma.TagCreateWithoutOrgInput> = z
+  .object({
+    id: z.string().optional(),
+    value: z.string(),
+    created_at: z.coerce.date().optional(),
+    updated_at: z.coerce.date().optional(),
+    deleted_at: z.coerce.date().optional().nullable(),
+    posts: z
+      .lazy(() => TagOnPostCreateNestedManyWithoutTagInputObjectSchema)
+      .optional(),
+  })
+  .strict();
+
+export const TagCreateWithoutOrgInputObjectSchema = Schema;
