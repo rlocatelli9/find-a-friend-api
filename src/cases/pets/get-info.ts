@@ -1,5 +1,5 @@
+import { ResourceNotFoundError } from "src/errors"
 import { IPetsRepository } from "src/repositories/interfaces"
-import { ResourceNotFoundError } from "../errors"
 
 export interface GetInfoPetProps {
   pet_id: string

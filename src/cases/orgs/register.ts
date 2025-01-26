@@ -1,3 +1,4 @@
+import { ResourceAlreadyExistsError } from "src/errors"
 import { IOrgsRepository } from "src/repositories/interfaces"
 
 export type AddressProps = {
@@ -30,6 +31,12 @@ export default class RegisterOrgCase {
     phone,
     address,
   }: OrgsRepositoryProps) {
+
+    const orgExists = await this.orgsRepository.findByOwnerId(owner_id);
+
+    if (orgExists) {
+      throw new ResourceAlreadyExistsError('Org already exists');
+    }
 
     const org = await this.orgsRepository.create({
       cnpj,

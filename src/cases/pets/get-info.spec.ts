@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import PetsFakeRepository from 'src/repositories/fake/pets-repository'
 import { randomUUID } from 'node:crypto'
 import GetInfoPetCase from './get-info'
-import { ResourceNotFoundError } from '../errors'
+import { ResourceNotFoundError } from 'src/errors'
 
 let fakeRepository: PetsFakeRepository
 let sut: GetInfoPetCase

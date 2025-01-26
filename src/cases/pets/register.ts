@@ -1,21 +1,8 @@
+import { PetUncheckedCreateInputObjectSchema } from "prisma/generated/schemas"
 import { IPetsRepository } from "src/repositories/interfaces"
+import { z } from "zod"
 
-export type PetType = 'DOG'|'CAT'|'OTHERS'
-export type PetSize = 'SMALL'|'MIDDLE'|'BIG'|'GIANT'
-
-export interface RegisterPetProps{
-  id?:string
-  type: PetType
-  name: string
-  race: string
-  deficiencies: boolean
-  description: string
-  owner_id: string
-  age: number
-  energy: number
-  available?: boolean
-  size: PetSize
-}
+export type RegisterPetProps = z.infer<typeof PetUncheckedCreateInputObjectSchema>
 
 export default class RegisterPetCase{
   constructor(private petsRepository: IPetsRepository){}
@@ -30,7 +17,7 @@ export default class RegisterPetCase{
     age,
     energy,
     available,
-    size
+    size,
   }: RegisterPetProps) {
 
     const pet = await this.petsRepository.create({
