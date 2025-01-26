@@ -27,10 +27,7 @@ export async function verifyOrgExists(request: FastifyRequest, reply: FastifyRep
     }
 
     if(error instanceof z.ZodError){
-      return reply.status(400).send({
-        message: 'validation error',
-        issues: JSON.parse(error.message)
-      })
+      throw error
     }
 
     return reply.status(400).send({
