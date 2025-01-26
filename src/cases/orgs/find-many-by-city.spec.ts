@@ -6,7 +6,7 @@ import OrgsFakeRepository from 'src/repositories/fake/orgs-repository'
 let fakeRepository: OrgsFakeRepository
 let sut: FindManyByCityCase
 
-describe("Pet filter by Query Case", () => {
+describe("Org filter by City case", () => {
 
   beforeEach(() => {
     fakeRepository = new OrgsFakeRepository()
