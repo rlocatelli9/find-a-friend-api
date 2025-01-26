@@ -38,7 +38,7 @@ model Post {
   title        String
   description  String
   owner_id     String
-  pet_id       String
+  pet_id       String      @unique
   published_at DateTime?
   deleted_at   DateTime?
   created_at   DateTime    @default(now())
