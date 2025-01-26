@@ -1,8 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
-import { UserAlreadyExistsError } from 'src/errors/user-already-exists'
-import { makeUserRegisterUseCase } from 'src/factories/make-user-register-use-case'
 import { makeOrgRegisterUseCase } from 'src/factories/make-orgs-register-use-case'
+import { ResourceAlreadyExistsError } from 'src/errors'
 
 const registerBodySchema = z.object({
   name: z.string(),
@@ -49,7 +48,7 @@ export default async function Register(
       owner_id: request.user.sub,
     })
   } catch (error) {
-    if (error instanceof UserAlreadyExistsError) {
+    if (error instanceof ResourceAlreadyExistsError) {
       return reply.status(409).send({
         message: error.message,
       })
