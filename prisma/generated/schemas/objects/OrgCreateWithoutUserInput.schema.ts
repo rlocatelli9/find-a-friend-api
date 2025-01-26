@@ -21,10 +21,10 @@ const Schema: z.ZodType<Prisma.OrgCreateWithoutUserInput> = z
     created_at: z.coerce.date().optional(),
     updated_at: z.coerce.date().optional(),
     deleted_at: z.coerce.date().optional().nullable(),
-    Pet: z
+    pets: z
       .lazy(() => PetCreateNestedManyWithoutOrgInputObjectSchema)
       .optional(),
-    Post: z
+    posts: z
       .lazy(() => PostCreateNestedManyWithoutOrgInputObjectSchema)
       .optional(),
     tags: z

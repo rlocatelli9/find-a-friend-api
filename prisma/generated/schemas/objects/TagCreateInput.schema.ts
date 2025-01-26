@@ -14,7 +14,7 @@ const Schema: z.ZodType<Prisma.TagCreateInput> = z
     posts: z
       .lazy(() => TagOnPostCreateNestedManyWithoutTagInputObjectSchema)
       .optional(),
-    Org: z.lazy(() => OrgCreateNestedOneWithoutTagsInputObjectSchema),
+    org: z.lazy(() => OrgCreateNestedOneWithoutTagsInputObjectSchema),
   })
   .strict();
 

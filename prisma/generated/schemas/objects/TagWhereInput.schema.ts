@@ -49,7 +49,7 @@ const Schema: z.ZodType<Prisma.TagWhereInput> = z
       .optional()
       .nullable(),
     posts: z.lazy(() => TagOnPostListRelationFilterObjectSchema).optional(),
-    Org: z
+    org: z
       .union([
         z.lazy(() => OrgRelationFilterObjectSchema),
         z.lazy(() => OrgWhereInputObjectSchema),

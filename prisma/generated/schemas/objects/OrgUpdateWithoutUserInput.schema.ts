@@ -96,10 +96,10 @@ const Schema: z.ZodType<Prisma.OrgUpdateWithoutUserInput> = z
       ])
       .optional()
       .nullable(),
-    Pet: z
+    pets: z
       .lazy(() => PetUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
-    Post: z
+    posts: z
       .lazy(() => PostUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
     tags: z

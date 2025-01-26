@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
-import { OrgUpdateOneRequiredWithoutPostNestedInputObjectSchema } from './OrgUpdateOneRequiredWithoutPostNestedInput.schema';
+import { OrgUpdateOneRequiredWithoutPostsNestedInputObjectSchema } from './OrgUpdateOneRequiredWithoutPostsNestedInput.schema';
 import { PetUpdateOneRequiredWithoutPostsNestedInputObjectSchema } from './PetUpdateOneRequiredWithoutPostsNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -48,7 +48,7 @@ const Schema: z.ZodType<Prisma.PostUpdateWithoutTagsInput> = z
       ])
       .optional(),
     org: z
-      .lazy(() => OrgUpdateOneRequiredWithoutPostNestedInputObjectSchema)
+      .lazy(() => OrgUpdateOneRequiredWithoutPostsNestedInputObjectSchema)
       .optional(),
     pet: z
       .lazy(() => PetUpdateOneRequiredWithoutPostsNestedInputObjectSchema)

@@ -22,7 +22,7 @@ const Schema: z.ZodType<Prisma.TagOrderByWithRelationInput> = z
     posts: z
       .lazy(() => TagOnPostOrderByRelationAggregateInputObjectSchema)
       .optional(),
-    Org: z.lazy(() => OrgOrderByWithRelationInputObjectSchema).optional(),
+    org: z.lazy(() => OrgOrderByWithRelationInputObjectSchema).optional(),
   })
   .strict();
 

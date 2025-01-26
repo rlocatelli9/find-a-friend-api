@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { TypeSchema } from '../enums/Type.schema';
 import { SizeSchema } from '../enums/Size.schema';
-import { OrgCreateNestedOneWithoutPetInputObjectSchema } from './OrgCreateNestedOneWithoutPetInput.schema';
+import { OrgCreateNestedOneWithoutPetsInputObjectSchema } from './OrgCreateNestedOneWithoutPetsInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -20,7 +20,7 @@ const Schema: z.ZodType<Prisma.PetCreateWithoutPostsInput> = z
     created_at: z.coerce.date().optional(),
     updated_at: z.coerce.date().optional(),
     deleted_at: z.coerce.date().optional().nullable(),
-    org: z.lazy(() => OrgCreateNestedOneWithoutPetInputObjectSchema),
+    org: z.lazy(() => OrgCreateNestedOneWithoutPetsInputObjectSchema),
   })
   .strict();
 

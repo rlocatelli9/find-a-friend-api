@@ -9,7 +9,7 @@ import { EnumSizeFieldUpdateOperationsInputObjectSchema } from './EnumSizeFieldU
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { PostUpdateManyWithoutPetNestedInputObjectSchema } from './PostUpdateManyWithoutPetNestedInput.schema';
-import { OrgUpdateOneRequiredWithoutPetNestedInputObjectSchema } from './OrgUpdateOneRequiredWithoutPetNestedInput.schema';
+import { OrgUpdateOneRequiredWithoutPetsNestedInputObjectSchema } from './OrgUpdateOneRequiredWithoutPetsNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -98,7 +98,7 @@ const Schema: z.ZodType<Prisma.PetUpdateInput> = z
       .lazy(() => PostUpdateManyWithoutPetNestedInputObjectSchema)
       .optional(),
     org: z
-      .lazy(() => OrgUpdateOneRequiredWithoutPetNestedInputObjectSchema)
+      .lazy(() => OrgUpdateOneRequiredWithoutPetsNestedInputObjectSchema)
       .optional(),
   })
   .strict();

@@ -3,10 +3,13 @@ import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdat
 import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
+import { UserUpdateOneRequiredWithoutOrgNestedInputObjectSchema } from './UserUpdateOneRequiredWithoutOrgNestedInput.schema';
+import { PetUpdateManyWithoutOrgNestedInputObjectSchema } from './PetUpdateManyWithoutOrgNestedInput.schema';
+import { TagUpdateManyWithoutOrgNestedInputObjectSchema } from './TagUpdateManyWithoutOrgNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.OrgUncheckedUpdateManyWithoutOrgInput> = z
+const Schema: z.ZodType<Prisma.OrgUpdateWithoutPostsInput> = z
   .object({
     id: z
       .union([
@@ -93,7 +96,16 @@ const Schema: z.ZodType<Prisma.OrgUncheckedUpdateManyWithoutOrgInput> = z
       ])
       .optional()
       .nullable(),
+    user: z
+      .lazy(() => UserUpdateOneRequiredWithoutOrgNestedInputObjectSchema)
+      .optional(),
+    pets: z
+      .lazy(() => PetUpdateManyWithoutOrgNestedInputObjectSchema)
+      .optional(),
+    tags: z
+      .lazy(() => TagUpdateManyWithoutOrgNestedInputObjectSchema)
+      .optional(),
   })
   .strict();
 
-export const OrgUncheckedUpdateManyWithoutOrgInputObjectSchema = Schema;
+export const OrgUpdateWithoutPostsInputObjectSchema = Schema;

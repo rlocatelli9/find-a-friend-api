@@ -101,10 +101,10 @@ const Schema: z.ZodType<Prisma.OrgUncheckedUpdateWithoutTagsInput> = z
       ])
       .optional()
       .nullable(),
-    Pet: z
+    pets: z
       .lazy(() => PetUncheckedUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
-    Post: z
+    posts: z
       .lazy(() => PostUncheckedUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
   })

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { RoleSchema } from '../enums/Role.schema';
-import { OrgUncheckedCreateNestedManyWithoutUserInputObjectSchema } from './OrgUncheckedCreateNestedManyWithoutUserInput.schema';
+import { OrgUncheckedCreateNestedOneWithoutUserInputObjectSchema } from './OrgUncheckedCreateNestedOneWithoutUserInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -15,7 +15,7 @@ const Schema: z.ZodType<Prisma.UserUncheckedCreateInput> = z
     deleted_at: z.coerce.date().optional().nullable(),
     role: z.lazy(() => RoleSchema).optional(),
     org: z
-      .lazy(() => OrgUncheckedCreateNestedManyWithoutUserInputObjectSchema)
+      .lazy(() => OrgUncheckedCreateNestedOneWithoutUserInputObjectSchema)
       .optional(),
   })
   .strict();

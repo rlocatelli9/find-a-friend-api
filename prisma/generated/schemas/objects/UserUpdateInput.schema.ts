@@ -4,7 +4,7 @@ import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldU
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
 import { RoleSchema } from '../enums/Role.schema';
 import { EnumRoleFieldUpdateOperationsInputObjectSchema } from './EnumRoleFieldUpdateOperationsInput.schema';
-import { OrgUpdateManyWithoutUserNestedInputObjectSchema } from './OrgUpdateManyWithoutUserNestedInput.schema';
+import { OrgUpdateOneWithoutUserNestedInputObjectSchema } from './OrgUpdateOneWithoutUserNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -60,7 +60,7 @@ const Schema: z.ZodType<Prisma.UserUpdateInput> = z
       ])
       .optional(),
     org: z
-      .lazy(() => OrgUpdateManyWithoutUserNestedInputObjectSchema)
+      .lazy(() => OrgUpdateOneWithoutUserNestedInputObjectSchema)
       .optional(),
   })
   .strict();

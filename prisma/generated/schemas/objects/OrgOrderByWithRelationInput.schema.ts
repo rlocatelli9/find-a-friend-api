@@ -31,8 +31,8 @@ const Schema: z.ZodType<Prisma.OrgOrderByWithRelationInput> = z
       ])
       .optional(),
     user: z.lazy(() => UserOrderByWithRelationInputObjectSchema).optional(),
-    Pet: z.lazy(() => PetOrderByRelationAggregateInputObjectSchema).optional(),
-    Post: z
+    pets: z.lazy(() => PetOrderByRelationAggregateInputObjectSchema).optional(),
+    posts: z
       .lazy(() => PostOrderByRelationAggregateInputObjectSchema)
       .optional(),
     tags: z.lazy(() => TagOrderByRelationAggregateInputObjectSchema).optional(),

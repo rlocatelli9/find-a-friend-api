@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { OrgWhereUniqueInputObjectSchema } from './OrgWhereUniqueInput.schema';
 import { OrgUpdateWithoutUserInputObjectSchema } from './OrgUpdateWithoutUserInput.schema';
 import { OrgUncheckedUpdateWithoutUserInputObjectSchema } from './OrgUncheckedUpdateWithoutUserInput.schema';
 import { OrgCreateWithoutUserInputObjectSchema } from './OrgCreateWithoutUserInput.schema';
@@ -7,9 +6,8 @@ import { OrgUncheckedCreateWithoutUserInputObjectSchema } from './OrgUncheckedCr
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.OrgUpsertWithWhereUniqueWithoutUserInput> = z
+const Schema: z.ZodType<Prisma.OrgUpsertWithoutUserInput> = z
   .object({
-    where: z.lazy(() => OrgWhereUniqueInputObjectSchema),
     update: z.union([
       z.lazy(() => OrgUpdateWithoutUserInputObjectSchema),
       z.lazy(() => OrgUncheckedUpdateWithoutUserInputObjectSchema),
@@ -21,4 +19,4 @@ const Schema: z.ZodType<Prisma.OrgUpsertWithWhereUniqueWithoutUserInput> = z
   })
   .strict();
 
-export const OrgUpsertWithWhereUniqueWithoutUserInputObjectSchema = Schema;
+export const OrgUpsertWithoutUserInputObjectSchema = Schema;

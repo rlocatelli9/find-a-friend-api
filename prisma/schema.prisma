@@ -58,7 +58,7 @@ model User {
   updated_at    DateTime  @updatedAt
   deleted_at    DateTime?
   role          Role      @default(MEMBER)
-  org           Org[]
+  org           Org?
 
   @@map("users")
 }
@@ -67,7 +67,7 @@ model Org {
   id         String    @id @default(uuid())
   name       String
   phone      String
-  cnpj       String
+  cnpj       String    @unique
   uf         String
   city       String
   complement String
@@ -77,8 +77,8 @@ model Org {
   longitude  Decimal
   owner_id   String    @unique
   user       User      @relation(fields: [owner_id], references: [id])
-  Pet        Pet[]
-  Post       Post[]
+  pets       Pet[]
+  posts      Post[]
   tags       Tag[]
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
@@ -113,7 +113,7 @@ model Tag {
   value      String
   owner_id   String
   posts      TagOnPost[]
-  Org        Org         @relation(fields: [owner_id], references: [id])
+  org        Org         @relation(fields: [owner_id], references: [id])
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
   deleted_at DateTime?

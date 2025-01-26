@@ -4,7 +4,8 @@ import { DateTimeFilterObjectSchema } from './DateTimeFilter.schema';
 import { DateTimeNullableFilterObjectSchema } from './DateTimeNullableFilter.schema';
 import { EnumRoleFilterObjectSchema } from './EnumRoleFilter.schema';
 import { RoleSchema } from '../enums/Role.schema';
-import { OrgListRelationFilterObjectSchema } from './OrgListRelationFilter.schema';
+import { OrgRelationFilterObjectSchema } from './OrgRelationFilter.schema';
+import { OrgWhereInputObjectSchema } from './OrgWhereInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -57,7 +58,13 @@ const Schema: z.ZodType<Prisma.UserWhereInput> = z
         z.lazy(() => RoleSchema),
       ])
       .optional(),
-    org: z.lazy(() => OrgListRelationFilterObjectSchema).optional(),
+    org: z
+      .union([
+        z.lazy(() => OrgRelationFilterObjectSchema),
+        z.lazy(() => OrgWhereInputObjectSchema),
+      ])
+      .optional()
+      .nullable(),
   })
   .strict();
 

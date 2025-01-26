@@ -8,7 +8,7 @@ import { SizeSchema } from '../enums/Size.schema';
 import { EnumSizeFieldUpdateOperationsInputObjectSchema } from './EnumSizeFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
-import { OrgUpdateOneRequiredWithoutPetNestedInputObjectSchema } from './OrgUpdateOneRequiredWithoutPetNestedInput.schema';
+import { OrgUpdateOneRequiredWithoutPetsNestedInputObjectSchema } from './OrgUpdateOneRequiredWithoutPetsNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -94,7 +94,7 @@ const Schema: z.ZodType<Prisma.PetUpdateWithoutPostsInput> = z
       .optional()
       .nullable(),
     org: z
-      .lazy(() => OrgUpdateOneRequiredWithoutPetNestedInputObjectSchema)
+      .lazy(() => OrgUpdateOneRequiredWithoutPetsNestedInputObjectSchema)
       .optional(),
   })
   .strict();

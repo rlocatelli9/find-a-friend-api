@@ -84,8 +84,8 @@ const Schema: z.ZodType<Prisma.OrgWhereInput> = z
         z.lazy(() => UserWhereInputObjectSchema),
       ])
       .optional(),
-    Pet: z.lazy(() => PetListRelationFilterObjectSchema).optional(),
-    Post: z.lazy(() => PostListRelationFilterObjectSchema).optional(),
+    pets: z.lazy(() => PetListRelationFilterObjectSchema).optional(),
+    posts: z.lazy(() => PostListRelationFilterObjectSchema).optional(),
     tags: z.lazy(() => TagListRelationFilterObjectSchema).optional(),
   })
   .strict();

@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { TypeSchema } from '../enums/Type.schema';
 import { SizeSchema } from '../enums/Size.schema';
 import { PostCreateNestedManyWithoutPetInputObjectSchema } from './PostCreateNestedManyWithoutPetInput.schema';
-import { OrgCreateNestedOneWithoutPetInputObjectSchema } from './OrgCreateNestedOneWithoutPetInput.schema';
+import { OrgCreateNestedOneWithoutPetsInputObjectSchema } from './OrgCreateNestedOneWithoutPetsInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -24,7 +24,7 @@ const Schema: z.ZodType<Prisma.PetCreateInput> = z
     posts: z
       .lazy(() => PostCreateNestedManyWithoutPetInputObjectSchema)
       .optional(),
-    org: z.lazy(() => OrgCreateNestedOneWithoutPetInputObjectSchema),
+    org: z.lazy(() => OrgCreateNestedOneWithoutPetsInputObjectSchema),
   })
   .strict();
 

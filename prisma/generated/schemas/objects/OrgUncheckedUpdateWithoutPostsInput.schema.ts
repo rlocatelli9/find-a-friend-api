@@ -1,28 +1,19 @@
 import { z } from 'zod';
 import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
-import { TypeSchema } from '../enums/Type.schema';
-import { EnumTypeFieldUpdateOperationsInputObjectSchema } from './EnumTypeFieldUpdateOperationsInput.schema';
-import { BoolFieldUpdateOperationsInputObjectSchema } from './BoolFieldUpdateOperationsInput.schema';
-import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
-import { SizeSchema } from '../enums/Size.schema';
-import { EnumSizeFieldUpdateOperationsInputObjectSchema } from './EnumSizeFieldUpdateOperationsInput.schema';
+import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
+import { PetUncheckedUpdateManyWithoutOrgNestedInputObjectSchema } from './PetUncheckedUpdateManyWithoutOrgNestedInput.schema';
+import { TagUncheckedUpdateManyWithoutOrgNestedInputObjectSchema } from './TagUncheckedUpdateManyWithoutOrgNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.PetUncheckedUpdateManyWithoutPetInput> = z
+const Schema: z.ZodType<Prisma.OrgUncheckedUpdateWithoutPostsInput> = z
   .object({
     id: z
       .union([
         z.string(),
         z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
-    type: z
-      .union([
-        z.lazy(() => TypeSchema),
-        z.lazy(() => EnumTypeFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     name: z
@@ -31,46 +22,64 @@ const Schema: z.ZodType<Prisma.PetUncheckedUpdateManyWithoutPetInput> = z
         z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
-    race: z
+    phone: z
       .union([
         z.string(),
         z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
-    deficiencies: z
-      .union([
-        z.boolean(),
-        z.lazy(() => BoolFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
-    description: z
+    cnpj: z
       .union([
         z.string(),
         z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
-    age: z
+    uf: z
+      .union([
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional(),
+    city: z
+      .union([
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional(),
+    complement: z
+      .union([
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional(),
+    country: z
+      .union([
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional(),
+    zip_code: z
+      .union([
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional(),
+    latitude: z
       .union([
         z.number(),
-        z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
-    energy: z
+    longitude: z
       .union([
         z.number(),
-        z.lazy(() => IntFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
-    available: z
+    owner_id: z
       .union([
-        z.boolean(),
-        z.lazy(() => BoolFieldUpdateOperationsInputObjectSchema),
-      ])
-      .optional(),
-    size: z
-      .union([
-        z.lazy(() => SizeSchema),
-        z.lazy(() => EnumSizeFieldUpdateOperationsInputObjectSchema),
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     created_at: z
@@ -92,7 +101,13 @@ const Schema: z.ZodType<Prisma.PetUncheckedUpdateManyWithoutPetInput> = z
       ])
       .optional()
       .nullable(),
+    pets: z
+      .lazy(() => PetUncheckedUpdateManyWithoutOrgNestedInputObjectSchema)
+      .optional(),
+    tags: z
+      .lazy(() => TagUncheckedUpdateManyWithoutOrgNestedInputObjectSchema)
+      .optional(),
   })
   .strict();
 
-export const PetUncheckedUpdateManyWithoutPetInputObjectSchema = Schema;
+export const OrgUncheckedUpdateWithoutPostsInputObjectSchema = Schema;

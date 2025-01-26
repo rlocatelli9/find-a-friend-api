@@ -9,7 +9,7 @@ import { TagUpdateManyWithoutOrgNestedInputObjectSchema } from './TagUpdateManyW
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.OrgUpdateWithoutPetInput> = z
+const Schema: z.ZodType<Prisma.OrgUpdateWithoutPetsInput> = z
   .object({
     id: z
       .union([
@@ -99,7 +99,7 @@ const Schema: z.ZodType<Prisma.OrgUpdateWithoutPetInput> = z
     user: z
       .lazy(() => UserUpdateOneRequiredWithoutOrgNestedInputObjectSchema)
       .optional(),
-    Post: z
+    posts: z
       .lazy(() => PostUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
     tags: z
@@ -108,4 +108,4 @@ const Schema: z.ZodType<Prisma.OrgUpdateWithoutPetInput> = z
   })
   .strict();
 
-export const OrgUpdateWithoutPetInputObjectSchema = Schema;
+export const OrgUpdateWithoutPetsInputObjectSchema = Schema;

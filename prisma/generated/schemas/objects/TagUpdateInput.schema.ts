@@ -43,7 +43,7 @@ const Schema: z.ZodType<Prisma.TagUpdateInput> = z
     posts: z
       .lazy(() => TagOnPostUpdateManyWithoutTagNestedInputObjectSchema)
       .optional(),
-    Org: z
+    org: z
       .lazy(() => OrgUpdateOneRequiredWithoutTagsNestedInputObjectSchema)
       .optional(),
   })

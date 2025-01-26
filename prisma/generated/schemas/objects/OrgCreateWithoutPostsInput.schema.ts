@@ -5,7 +5,7 @@ import { TagCreateNestedManyWithoutOrgInputObjectSchema } from './TagCreateNeste
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.OrgCreateWithoutPostInput> = z
+const Schema: z.ZodType<Prisma.OrgCreateWithoutPostsInput> = z
   .object({
     id: z.string().optional(),
     name: z.string(),
@@ -22,7 +22,7 @@ const Schema: z.ZodType<Prisma.OrgCreateWithoutPostInput> = z
     updated_at: z.coerce.date().optional(),
     deleted_at: z.coerce.date().optional().nullable(),
     user: z.lazy(() => UserCreateNestedOneWithoutOrgInputObjectSchema),
-    Pet: z
+    pets: z
       .lazy(() => PetCreateNestedManyWithoutOrgInputObjectSchema)
       .optional(),
     tags: z
@@ -31,4 +31,4 @@ const Schema: z.ZodType<Prisma.OrgCreateWithoutPostInput> = z
   })
   .strict();
 
-export const OrgCreateWithoutPostInputObjectSchema = Schema;
+export const OrgCreateWithoutPostsInputObjectSchema = Schema;

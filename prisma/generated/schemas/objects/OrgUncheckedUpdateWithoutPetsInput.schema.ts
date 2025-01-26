@@ -3,13 +3,12 @@ import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdat
 import { DecimalFieldUpdateOperationsInputObjectSchema } from './DecimalFieldUpdateOperationsInput.schema';
 import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
 import { NullableDateTimeFieldUpdateOperationsInputObjectSchema } from './NullableDateTimeFieldUpdateOperationsInput.schema';
-import { UserUpdateOneRequiredWithoutOrgNestedInputObjectSchema } from './UserUpdateOneRequiredWithoutOrgNestedInput.schema';
-import { PetUpdateManyWithoutOrgNestedInputObjectSchema } from './PetUpdateManyWithoutOrgNestedInput.schema';
-import { TagUpdateManyWithoutOrgNestedInputObjectSchema } from './TagUpdateManyWithoutOrgNestedInput.schema';
+import { PostUncheckedUpdateManyWithoutOrgNestedInputObjectSchema } from './PostUncheckedUpdateManyWithoutOrgNestedInput.schema';
+import { TagUncheckedUpdateManyWithoutOrgNestedInputObjectSchema } from './TagUncheckedUpdateManyWithoutOrgNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
 
-const Schema: z.ZodType<Prisma.OrgUpdateWithoutPostInput> = z
+const Schema: z.ZodType<Prisma.OrgUncheckedUpdateWithoutPetsInput> = z
   .object({
     id: z
       .union([
@@ -77,6 +76,12 @@ const Schema: z.ZodType<Prisma.OrgUpdateWithoutPostInput> = z
         z.lazy(() => DecimalFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
+    owner_id: z
+      .union([
+        z.string(),
+        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+      ])
+      .optional(),
     created_at: z
       .union([
         z.coerce.date(),
@@ -96,16 +101,13 @@ const Schema: z.ZodType<Prisma.OrgUpdateWithoutPostInput> = z
       ])
       .optional()
       .nullable(),
-    user: z
-      .lazy(() => UserUpdateOneRequiredWithoutOrgNestedInputObjectSchema)
-      .optional(),
-    Pet: z
-      .lazy(() => PetUpdateManyWithoutOrgNestedInputObjectSchema)
+    posts: z
+      .lazy(() => PostUncheckedUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
     tags: z
-      .lazy(() => TagUpdateManyWithoutOrgNestedInputObjectSchema)
+      .lazy(() => TagUncheckedUpdateManyWithoutOrgNestedInputObjectSchema)
       .optional(),
   })
   .strict();
 
-export const OrgUpdateWithoutPostInputObjectSchema = Schema;
+export const OrgUncheckedUpdateWithoutPetsInputObjectSchema = Schema;

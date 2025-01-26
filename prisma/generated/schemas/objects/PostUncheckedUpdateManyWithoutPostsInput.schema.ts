@@ -25,7 +25,7 @@ const Schema: z.ZodType<Prisma.PostUncheckedUpdateManyWithoutPostsInput> = z
         z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
-    owner_id: z
+    pet_id: z
       .union([
         z.string(),
         z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),

@@ -10,7 +10,7 @@ const Schema: z.ZodType<Prisma.TagCreateWithoutPostsInput> = z
     created_at: z.coerce.date().optional(),
     updated_at: z.coerce.date().optional(),
     deleted_at: z.coerce.date().optional().nullable(),
-    Org: z.lazy(() => OrgCreateNestedOneWithoutTagsInputObjectSchema),
+    org: z.lazy(() => OrgCreateNestedOneWithoutTagsInputObjectSchema),
   })
   .strict();
 
