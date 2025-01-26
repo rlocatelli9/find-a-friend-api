@@ -4,7 +4,7 @@ import PostsRegisterService from 'src/cases/posts/register'
 
 export function makePostRegisterUseCase(): PostsRegisterService {
   const postsRepository = new PrismaPostsRepository()
-  const registerOrgService = new PostsRegisterService(postsRepository)
+  const postsRegisterService = new PostsRegisterService(postsRepository)
 
-  return registerOrgService
+  return postsRegisterService
 }

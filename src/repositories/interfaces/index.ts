@@ -1,6 +1,7 @@
 import { Org, Pet, Post, Prisma, Size, Tag, TagOnPost, Type, User } from "@prisma/client";
 import { FindManyByCityProps } from "src/cases/orgs/find-many-by-city";
 import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
+import { PaginatedPublishedPostsProps, PaginatedPublishedPostsResponse } from "src/cases/posts/find-many-available";
 
 export interface IUsersRepository {
   create(data: Prisma.UserCreateInput): Promise<User>
@@ -26,6 +27,7 @@ export interface IOrgsRepository {
 export interface IPostsRepository {
   create(data: Prisma.PostUncheckedCreateInput): Promise<Post>
   findByPetId(id: string): Promise<Post | null>
+  findManyPublishedAvailable(data: PaginatedPublishedPostsProps): Promise<PaginatedPublishedPostsResponse>
 }
 
 export interface ITagsRepository {
@@ -41,4 +43,9 @@ export type PetQueryProps = {
   age: string,
   energy: string,
   size: Size
+}
+
+export type PaginationMetaProps  = {
+  totalCount: number
+  pageCount: number
 }
