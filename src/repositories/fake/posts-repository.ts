@@ -6,6 +6,15 @@ export default class PostsFakeRepository implements IPostsRepository{
   private posts: Array<Post> = []
 
   constructor(){}
+  async findByPetId(id: string) {
+    const post = this.posts.find(post => post.pet_id === id)
+
+    if(!post){
+      return null
+    }
+
+    return post
+  }
 
   async create(data: Prisma.PostUncheckedCreateInput) {
     const post = {

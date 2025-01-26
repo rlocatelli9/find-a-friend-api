@@ -7,6 +7,15 @@ export default class OrgsFakeRepository implements IOrgsRepository{
   private orgs: Array<Org> = []
 
   constructor(){}
+  async findById(id: string) {
+    const org = this.orgs.find(org => org.id === id)
+
+    if(!org) {
+      return null
+    }
+
+    return org
+  }
   async findManyByCity({ uf, city, page=1, pageSize=10 }:FindManyByCityProps ){
     const orgs = this.orgs.filter(org => (org.uf === uf && org.city === city))
 

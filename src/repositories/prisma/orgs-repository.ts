@@ -4,6 +4,15 @@ import { IOrgsRepository } from "../interfaces";
 import { prisma } from "src/lib/prisma";
 
 export default class OrgsRepository implements IOrgsRepository{
+  async findById(id: string): Promise<Org | null> {
+    const org = await prisma.org.findUnique({
+      where: {
+        id
+      }
+    })
+
+    return org
+  }
   async create(data: Prisma.OrgUncheckedCreateInput): Promise<Org> {
     const org = await prisma.org.create({
       data
