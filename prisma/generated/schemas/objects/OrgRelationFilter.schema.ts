@@ -7,12 +7,10 @@ const Schema: z.ZodType<Prisma.OrgRelationFilter> = z
   .object({
     is: z
       .lazy(() => OrgWhereInputObjectSchema)
-      .optional()
-      .nullable(),
+      .optional(),
     isNot: z
       .lazy(() => OrgWhereInputObjectSchema)
       .optional()
-      .nullable(),
   })
   .strict();
 

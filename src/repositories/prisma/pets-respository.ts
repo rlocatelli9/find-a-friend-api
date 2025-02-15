@@ -4,7 +4,7 @@ import { IPetsRepository, PetQueryProps } from "../interfaces";
 import { prisma } from "src/lib/prisma";
 
 export default class PetsRepository implements IPetsRepository {
-  async create(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {
+  async create(data: Prisma.PetCreateInput): Promise<Pet> {
     const pet = await prisma.pet.create({
       data
     })

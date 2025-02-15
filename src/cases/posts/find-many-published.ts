@@ -10,7 +10,7 @@ export type PaginatedPublishedPostsResponse = {
   meta: PaginationMetaProps
 }
 
-export default class RegisterPostCase {
+export default class PublishedPostCase {
   constructor(private postsRepository: IPostsRepository){}
 
   async execute({
@@ -19,7 +19,7 @@ export default class RegisterPostCase {
     where
   }: PaginatedPublishedPostsProps){
 
-    const posts = await this.postsRepository.findManyPublishedAvailable({take, skip, where})
+    const posts = await this.postsRepository.findManyPublished({take, skip, where})
 
     return posts
 

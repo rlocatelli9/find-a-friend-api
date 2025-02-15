@@ -1,10 +1,10 @@
 import { Prisma, Post } from "@prisma/client";
 import { IPostsRepository } from "../interfaces";
 import { prisma } from "src/lib/prisma";
-import { PaginatedPublishedPostsProps, PaginatedPublishedPostsResponse } from "src/cases/posts/find-many-available";
+import { PaginatedPublishedPostsProps } from "src/cases/posts/find-many-published";
 
 export default class PostsRepository implements IPostsRepository {
-  async findManyPublishedAvailable({take=10, skip=0, where}: PaginatedPublishedPostsProps) {
+  async findManyPublished({take=10, skip=0, where}: PaginatedPublishedPostsProps) {
 
     const query = {
       where: {
@@ -48,7 +48,7 @@ export default class PostsRepository implements IPostsRepository {
     return post
   }
 
-  async create(data: Prisma.PostUncheckedCreateInput): Promise<Post> {
+  async create(data: Prisma.PostCreateInput): Promise<Post> {
     const post = await prisma.post.create({ data });
     return post
   }

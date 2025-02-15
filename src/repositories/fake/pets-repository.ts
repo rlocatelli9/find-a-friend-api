@@ -71,7 +71,7 @@ export default class PetsFakeRepository implements IPetsRepository{
     return user
   }
 
-  async create(data: Prisma.PetUncheckedCreateInput) {
+  async create(data: Prisma.PetCreateInput) {
     const pet = {
       id          :data.id ?? randomUUID(),
       type        :data.type,
@@ -79,7 +79,7 @@ export default class PetsFakeRepository implements IPetsRepository{
       race        :data.race,
       deficiencies:data.deficiencies,
       description :data.description,
-      owner_id    :data.owner_id,
+      owner_id    :data.org.connect?.id,
       age         :data.age,
       energy      :data.energy,
       size        :data.size,

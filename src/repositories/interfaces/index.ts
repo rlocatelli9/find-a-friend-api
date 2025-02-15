@@ -1,7 +1,7 @@
 import { Org, Pet, Post, Prisma, Size, Tag, TagOnPost, Type, User } from "@prisma/client";
 import { FindManyByCityProps } from "src/cases/orgs/find-many-by-city";
 import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
-import { PaginatedPublishedPostsProps, PaginatedPublishedPostsResponse } from "src/cases/posts/find-many-available";
+import { PaginatedPublishedPostsProps, PaginatedPublishedPostsResponse } from "src/cases/posts/find-many-published";
 
 export interface IUsersRepository {
   create(data: Prisma.UserCreateInput): Promise<User>
@@ -10,7 +10,7 @@ export interface IUsersRepository {
 }
 
 export interface IPetsRepository {
-  create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
+  create(data: Prisma.PetCreateInput): Promise<Pet>
   findById(petId: string): Promise<Pet | null>
   findManyByQuery({query, page, pageSize}:FilterByQueryPetProps): Promise<Pet[]>
   findByOwnerId(ownerId: string): Promise<Pet | null>
@@ -25,9 +25,9 @@ export interface IOrgsRepository {
 }
 
 export interface IPostsRepository {
-  create(data: Prisma.PostUncheckedCreateInput): Promise<Post>
+  create(data: Prisma.PostCreateInput): Promise<Post>
   findByPetId(id: string): Promise<Post | null>
-  findManyPublishedAvailable(data: PaginatedPublishedPostsProps): Promise<PaginatedPublishedPostsResponse>
+  findManyPublished(data: PaginatedPublishedPostsProps): Promise<PaginatedPublishedPostsResponse>
 }
 
 export interface ITagsRepository {
