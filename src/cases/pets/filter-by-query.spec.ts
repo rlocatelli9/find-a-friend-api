@@ -20,7 +20,11 @@ describe("Pet filter by Query Case", () => {
         name        :`Node`,
         race        :'SRD',
         description :'muito fofo',
-        owner_id    :randomUUID(),
+        org         : {
+          connect: {
+            id    :randomUUID(),
+          }
+        },
         age         :2,
         energy      :40,
         size        :'SMALL',
@@ -47,7 +51,11 @@ describe("Pet filter by Query Case", () => {
         name        :`Node ${index+1}`,
         race        :'SRD',
         description :'muito fofo',
-        owner_id    :randomUUID(),
+        org         : {
+          connect: {
+            id    :randomUUID(),
+          }
+        },
         age         :index+1,
         energy      :40+index,
         size        :'SMALL',
@@ -62,7 +70,11 @@ describe("Pet filter by Query Case", () => {
         name        :`Java ${index+1}`,
         race        :'SRD',
         description :'muito fofo',
-        owner_id    :randomUUID(),
+        org         : {
+          connect: {
+            id    :randomUUID(),
+          }
+        },
         age         :index+1,
         energy      :40+index,
         size        :'SMALL',

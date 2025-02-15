@@ -21,7 +21,11 @@ describe('Pet Get Info Case', () => {
       name        :'Node',
       race        :'SRD',
       description :'muito fofo',
-      owner_id    :randomUUID(),
+      org         : {
+        connect: {
+          id    :randomUUID(),
+        }
+      },
       age         :12,
       energy      :50,
       size        :'SMALL',
