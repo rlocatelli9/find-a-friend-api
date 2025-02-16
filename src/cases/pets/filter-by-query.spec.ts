@@ -20,23 +20,34 @@ describe("Pet filter by Query Case", () => {
         name        :`Node`,
         race        :'SRD',
         description :'muito fofo',
-        owner_id    :randomUUID(),
+        org         : {
+          connect: {
+            id    :randomUUID(),
+          }
+        },
         age         :2,
         energy      :40,
         size        :'SMALL',
         deficiencies: false,
       })
 
-    const {pets} = await sut.execute({query: 'energy=40'})
+    const {data, meta} = await sut.execute({where: {energy: 40}})
 
-    expect(pets).toHaveLength(1)
+    expect(data).toHaveLength(1)
 
-    expect(pets).toEqual([
+    expect(data).toEqual([
       expect.objectContaining({
         id          :expect.stringMatching('fake_pet-1'),
         type        :'CAT',
       })
     ])
+
+    expect(meta).toEqual(
+      expect.objectContaining({
+        totalCount: 1,
+        pageCount: 1
+      })
+    )
   })
 
   it("should be able to paginated filter pet by query", async () => {
@@ -47,7 +58,11 @@ describe("Pet filter by Query Case", () => {
         name        :`Node ${index+1}`,
         race        :'SRD',
         description :'muito fofo',
-        owner_id    :randomUUID(),
+        org         : {
+          connect: {
+            id    :randomUUID(),
+          }
+        },
         age         :index+1,
         energy      :40+index,
         size        :'SMALL',
@@ -62,7 +77,11 @@ describe("Pet filter by Query Case", () => {
         name        :`Java ${index+1}`,
         race        :'SRD',
         description :'muito fofo',
-        owner_id    :randomUUID(),
+        org         : {
+          connect: {
+            id    :randomUUID(),
+          }
+        },
         age         :index+1,
         energy      :40+index,
         size        :'SMALL',
@@ -70,11 +89,18 @@ describe("Pet filter by Query Case", () => {
       })
     }
 
-    const {pets} = await sut.execute({query: 'size=SMALL;type=DOG', page: 3, pageSize: 10})
+    const {data} = await sut.execute({
+      where: {
+        size:'SMALL',
+        type:'DOG',
+      },
+      take: 10,
+      skip: 20
+    })
 
-    expect(pets).toHaveLength(2)
+    expect(data).toHaveLength(2)
 
-    expect(pets).toEqual([
+    expect(data).toEqual([
       expect.objectContaining({
         id          :'fake_pet-9',
         type        :'CAT',

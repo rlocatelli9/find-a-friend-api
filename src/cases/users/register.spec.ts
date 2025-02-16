@@ -2,7 +2,7 @@ import UsersFakeRepository from 'src/repositories/fake/users-repository'
 import {beforeEach, describe, expect, it} from 'vitest'
 import UserRegisterCase from './register'
 import { compare } from 'bcryptjs'
-import { UserAlreadyExistsError } from '../errors'
+import { UserAlreadyExistsError } from '../../errors'
 
 let fakeUsersRepository: UsersFakeRepository
 let sut: UserRegisterCase
@@ -21,6 +21,7 @@ describe('User Register Case', () => {
       name: 'user',
       email: 'user@test',
       password: 'abc123',
+      role: 'MEMBER',
     })
 
     const isPasswordCorrectlyHashed = await compare('abc123', passwordHash)
@@ -33,12 +34,14 @@ describe('User Register Case', () => {
       name: 'user-1',
       email: 'user@test',
       password: 'abc123',
+      role: 'MEMBER',
     })
 
     await expect(()=> sut.execute({
       name: 'user-2',
       email: 'user@test',
       password: 'abc123',
+      role: 'MEMBER',
     })).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
 })

@@ -18,6 +18,15 @@ describe('Org Register Case', () => {
       name: "Organização Tabajara",
       owner_id: 'user_1',
       phone: '084999999999',
+      address: {
+        city: 'Fortaleza',
+        uf: 'CE',
+        complement: 'Rua número zero',
+        country: 'Brasil',
+        zip_code: '60055888',
+        latitude: -3.7380798,
+        longitude: -38.5071317
+      }
     })
 
     expect(org).toEqual(

@@ -1,24 +1,15 @@
-import { IPetsRepository } from "src/repositories/interfaces"
+import { PetUncheckedCreateInputObjectSchema } from "prisma/generated/schemas"
+import { ResourceNotFoundError } from "src/errors"
+import { IOrgsRepository, IPetsRepository } from "src/repositories/interfaces"
+import { z } from "zod"
 
-export type PetType = 'DOG'|'CAT'|'OTHERS'
-export type PetSize = 'SMALL'|'MIDDLE'|'BIG'|'GIANT'
-
-export interface RegisterPetProps{
-  id?:string
-  type: PetType
-  name: string
-  race: string
-  deficiencies: boolean
-  description: string
-  owner_id: string
-  age: number
-  energy: number
-  available?: boolean
-  size: PetSize
-}
+export type RegisterPetProps = z.infer<typeof PetUncheckedCreateInputObjectSchema>
 
 export default class RegisterPetCase{
-  constructor(private petsRepository: IPetsRepository){}
+  constructor(
+    private petsRepository: IPetsRepository,
+    private orgsRepository: IOrgsRepository,
+  ){}
 
   async execute({
     type,
@@ -30,8 +21,14 @@ export default class RegisterPetCase{
     age,
     energy,
     available,
-    size
+    size,
   }: RegisterPetProps) {
+
+    const org = await this.orgsRepository.findById(owner_id)
+
+    if(!org) {
+      throw new ResourceNotFoundError('The Org is not exists')
+    }
 
     const pet = await this.petsRepository.create({
       type,
@@ -39,7 +36,11 @@ export default class RegisterPetCase{
       race,
       description,
       deficiencies,
-      owner_id,
+      org: {
+        connect: {
+          id: org.id
+        }
+      },
       age,
       energy,
       available,
