@@ -4,7 +4,7 @@ import type { Prisma } from '@prisma/client';
 
 const Schema: z.ZodType<Prisma.PetWhereUniqueInput> = z
   .object({
-    id: z.string().optional(),
+    id: z.string().uuid(),
   })
   .strict();
 

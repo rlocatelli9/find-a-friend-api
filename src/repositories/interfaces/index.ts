@@ -1,6 +1,6 @@
 import { Org, Pet, Post, Prisma, Size, Tag, TagOnPost, Type, User } from "@prisma/client";
 import { FindManyByCityProps } from "src/cases/orgs/find-many-by-city";
-import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query";
+import { FilterByQueryPetProps, PaginatedPublishedPetsResponse } from "src/cases/pets/filter-by-query";
 import { PaginatedPublishedPostsProps, PaginatedPublishedPostsResponse } from "src/cases/posts/find-many-published";
 
 export interface IUsersRepository {
@@ -12,7 +12,7 @@ export interface IUsersRepository {
 export interface IPetsRepository {
   create(data: Prisma.PetCreateInput): Promise<Pet>
   findById(petId: string): Promise<Pet | null>
-  findManyByQuery({query, page, pageSize}:FilterByQueryPetProps): Promise<Pet[]>
+  findManyByQuery({take, skip, where}:FilterByQueryPetProps): Promise<PaginatedPublishedPetsResponse>
   findByOwnerId(ownerId: string): Promise<Pet | null>
 }
 

@@ -2,20 +2,20 @@ import { ResourceNotFoundError } from "src/errors"
 import { IPetsRepository } from "src/repositories/interfaces"
 
 export interface GetInfoPetProps {
-  pet_id: string
+  id: string
 }
 
 export default class GetInfoPetCase{
   constructor(private petsRepository: IPetsRepository){}
 
   async execute({
-    pet_id
+    id
   }: GetInfoPetProps) {
 
-    const pet = await this.petsRepository.findById(pet_id)
+    const pet = await this.petsRepository.findById(id)
 
     if(!pet) {
-      throw new ResourceNotFoundError()
+      throw new ResourceNotFoundError('Not found the pet')
     }
 
     return {

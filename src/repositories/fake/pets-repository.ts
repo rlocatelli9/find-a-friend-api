@@ -1,5 +1,5 @@
 import { Pet, Prisma } from "@prisma/client"
-import { IPetsRepository, PetQueryProps } from "../interfaces"
+import { IPetsRepository } from "../interfaces"
 import { randomUUID } from "node:crypto"
 import { FilterByQueryPetProps } from "src/cases/pets/filter-by-query"
 
@@ -7,48 +7,44 @@ export default class PetsFakeRepository implements IPetsRepository{
   private pets: Array<Pet> = []
 
   constructor() {}
-  async findManyByQuery({ query, page = 1, pageSize = 10}:FilterByQueryPetProps) {
-    const splitedQuery = query.split(';')
-    let fields = {} as PetQueryProps
+  async findManyByQuery({ where, skip = 0, take = 10}:FilterByQueryPetProps){
 
-    if(splitedQuery?.length){
-      splitedQuery.forEach(query => {
-        const [key, value] = query.split('=')
-        const item = {
-          [key]: value
-        }
-        fields = {...fields, ...item}
-      })
+    const filteredPetsByType = where?.type ? this.pets.filter(pet => pet.type === where?.type) : []
+    const filteredPetsByAge = where?.age ? this.pets.filter(pet => pet.age <= Number(where?.age)) : []
+    const filteredPetEnergy = where?.energy ? this.pets.filter(pet => pet.energy <= Number(where?.energy)) : []
+    const filteredPetSize = where?.size ? this.pets.filter(pet => pet.size === where?.size) : []
 
-      const filteredPetsByType = fields?.type ? this.pets.filter(pet => pet.type === fields?.type) : []
-      const filteredPetsByAge = fields?.age ? this.pets.filter(pet => pet.age === Number(fields?.age)) : []
-      const filteredPetEnergy = fields?.energy ? this.pets.filter(pet => pet.energy === Number(fields?.energy)) : []
-      const filteredPetSize = fields?.size ? this.pets.filter(pet => pet.size === fields?.size) : []
+    const set = new Set([...filteredPetsByType, ...filteredPetsByAge, ...filteredPetEnergy, ...filteredPetSize])
+    let serializedPets = []
 
-      const set = new Set([...filteredPetsByType, ...filteredPetsByAge, ...filteredPetEnergy, ...filteredPetSize])
-      let serializedPets = []
-
-      for (const iterator of set) {
-        if(iterator) serializedPets.push(iterator)
-      }
-
-      let pageValue = page
-      if (page < 1) {
-        pageValue = 1
-      }
-      const totalPages = Math.ceil(serializedPets.length / pageSize)
-      if (pageValue > totalPages) pageValue = totalPages;
-
-      const pets = []
-
-      for (var i = (pageValue-1) * pageSize; i < (pageValue * pageSize) && i < serializedPets.length; i+=1) {
-        pets.push(serializedPets[i])
-      }
-
-      return pets
+    for (const iterator of set) {
+      if(iterator) serializedPets.push(iterator)
     }
 
-    return []
+    let startIndex = 0
+    if(skip >= serializedPets.length) {
+      return {
+        data: [],
+        meta: {
+          totalCount: serializedPets.length,
+          pageCount: Math.ceil(serializedPets.length / take)
+        }
+      }
+    }
+
+    if(skip > 0 && skip < serializedPets.length) {
+      startIndex = skip
+    }
+    const endIndex = startIndex + (take - 1)
+    const paginatedPets = serializedPets.slice(startIndex, endIndex) as Pet[]
+
+    return {
+      data: paginatedPets,
+      meta: {
+        totalCount: serializedPets.length,
+        pageCount: Math.ceil(serializedPets.length / take)
+      }
+    }
   }
 
   async findById(petId: string) {

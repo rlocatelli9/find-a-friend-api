@@ -1,25 +1,28 @@
-import { IPetsRepository } from "src/repositories/interfaces"
+import { Pet } from "@prisma/client"
+import { PetFindManySchema } from "prisma/generated/schemas"
+import { IPetsRepository, PaginationMetaProps } from "src/repositories/interfaces"
+import { z } from "zod"
 
-export interface FilterByQueryPetProps {
-  page?: number,
-  pageSize?: number,
-  query: string,
+export type FilterByQueryPetProps = z.infer<typeof PetFindManySchema>
+
+export type PaginatedPublishedPetsResponse = {
+  data: Pet[]
+  meta: PaginationMetaProps
 }
 
 export default class FilterByQueryPetCase{
   constructor(private petsRepository: IPetsRepository){}
 
   async execute({
-    page,
-    pageSize,
-    query
+    take,
+    skip,
+    where
   }: FilterByQueryPetProps) {
 
-    const pets = await this.petsRepository.findManyByQuery({page, pageSize, query})
+    const data = await this.petsRepository.findManyByQuery({take, skip, where})
 
-    return {
-      pets
-    }
+    return data
+
   }
 
 }
