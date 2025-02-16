@@ -31,16 +31,23 @@ describe("Pet filter by Query Case", () => {
         deficiencies: false,
       })
 
-    const {pets} = await sut.execute({query: 'energy=40'})
+    const {data, meta} = await sut.execute({where: {energy: 40}})
 
-    expect(pets).toHaveLength(1)
+    expect(data).toHaveLength(1)
 
-    expect(pets).toEqual([
+    expect(data).toEqual([
       expect.objectContaining({
         id          :expect.stringMatching('fake_pet-1'),
         type        :'CAT',
       })
     ])
+
+    expect(meta).toEqual(
+      expect.objectContaining({
+        totalCount: 1,
+        pageCount: 1
+      })
+    )
   })
 
   it("should be able to paginated filter pet by query", async () => {
@@ -82,11 +89,18 @@ describe("Pet filter by Query Case", () => {
       })
     }
 
-    const {pets} = await sut.execute({query: 'size=SMALL;type=DOG', page: 3, pageSize: 10})
+    const {data} = await sut.execute({
+      where: {
+        size:'SMALL',
+        type:'DOG',
+      },
+      take: 10,
+      skip: 20
+    })
 
-    expect(pets).toHaveLength(2)
+    expect(data).toHaveLength(2)
 
-    expect(pets).toEqual([
+    expect(data).toEqual([
       expect.objectContaining({
         id          :'fake_pet-9',
         type        :'CAT',
