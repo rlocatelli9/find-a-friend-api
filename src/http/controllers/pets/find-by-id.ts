@@ -3,7 +3,7 @@ import { makeGetPetByIdUseCase } from 'src/factories/make-get-pet-by-id'
 import { z } from 'zod'
 
 
-const petGetByIdSchema = z
+const PetGetByIdSchema = z
   .object({
     id: z.string().uuid(),
   })
@@ -14,7 +14,7 @@ export default async function GetById(
 ) {
 
   try {
-    const {id} = petGetByIdSchema.parse(request.params)
+    const {id} = PetGetByIdSchema.parse(request.params)
 
     const getPetByIdService = makeGetPetByIdUseCase()
 

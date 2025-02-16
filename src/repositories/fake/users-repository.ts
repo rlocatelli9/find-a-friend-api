@@ -7,7 +7,7 @@ export default class UsersFakeRepository implements IUsersRepository{
 
   constructor() {}
   async findById(id: string) {
-    const user = this.users.find(user => user.email === id)
+    const user = this.users.find(user => user.id === id)
 
     if(!user) {
       return null
